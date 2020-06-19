@@ -1,2 +1,2 @@
-web:	gunicorn baseball_Database.wsgi --log-level debug
+web:	gunicorn baseball_database.wsgi --log-level debug
 release: python manage.py migrate
