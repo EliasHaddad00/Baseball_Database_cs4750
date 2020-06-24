@@ -2,7 +2,7 @@
 Django settings for baseball_database project.
 """
 
-import os
+import os, sys
 import django_heroku
 
 
@@ -16,10 +16,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5c20zn)zuqugm(pm_lb0mognw@x14(lph(vuxo^x-&l@4qv0f2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (sys.argv[1] == 'runserver')
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['database-sluggers.herokuapp.com']
 
 # Application definition
 
