@@ -5,4 +5,4 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the sluggers index.")
+    return render(template_name='sluggers/landing.html', request=request)
