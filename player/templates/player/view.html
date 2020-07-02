@@ -1,0 +1,94 @@
+{% extends 'sluggers/base.html' %}
+
+{% block content %}
+<!-- Team Summary -->
+<div class="card shadow p-4 border rounded-corner mt-5">
+    <h1>John Bullock</h1>
+    <h3 class="text-muted">3B - Washington Nationals<br></h3>
+    <ul class="nav nav-pills nav-fill mt-3">
+        <li class="nav-item"><a class="nav-link active rounded-corner" data-toggle="tab" href="#playerinfo">Player Info</a></li>
+        <li class="nav-item"><a class="nav-link rounded-corner" data-toggle="tab" href="#stats">Statistics</a></li>
+        <li class="nav-item"><a class="nav-link rounded-corner" data-toggle="tab" href="#graphs">Graphs</a></li>
+    </ul>
+    <div class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="playerinfo">
+            <div class="card shadow p-3 border rounded-corner">
+                <h4>Uniform Number</h4>
+                <hr class="mt-0 mb-1">
+                <p>15</p>
+                <br>
+
+                <h4>Date of Birth</h4>
+                <hr class="mt-0 mb-1">
+                <p>Oct 6th, 1998</p>
+                <br>
+
+                <h4>Emergency Contact</h4>
+                <hr class="mt-0 mb-1">
+                <p>
+                    <strong>Joe Bullock</strong><br>
+                    <a href="#" class="text-decoration-none">(703) 703-7037</a><br>
+                    <a href="#" class="text-decoration-none">jb@jb.com</a>
+                </p>
+
+            </div>
+        </div> 
+        <div class="tab-pane fade" id="stats">
+            <div class="card shadow p-3 border rounded-corner">
+                <h4>Pitching</h4>
+                <table class="table table-striped table-sm left-justify">
+                    <thead>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Per Game</th>
+                    </thead>
+                    <tr>
+                        <th scope="row">Games Played</th>
+                        <td>10</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Innings Pitched</th>
+                        <td>17</td>
+                        <td>1.7</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Hits Allowed</th>
+                        <td>86</td>
+                        <td>8.6</td>
+                    </tr>
+                </table>
+                <br>
+                <h4>Fielding</h4>
+                <table class="table table-striped table-sm left-justify">
+                    <thead>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Per Game</th>
+                    </thead>
+                    <tr>
+                        <th scope="row">Games Played</th>
+                        <td>10</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">At Bats</th>
+                        <td>36</td>
+                        <td>3.6</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Singles</th>
+                        <td>12</td>
+                        <td>1.2</td>
+                    </tr>
+                </table>
+            </div>
+        </div> 
+        <div class="tab-pane fade" id="graphs">
+            <div class="card shadow p-3 border rounded-corner">
+
+            </div>
+        </div> 
+    </div>
+</div>
+{% endblock %}
