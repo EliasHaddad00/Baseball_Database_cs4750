@@ -1,0 +1,40 @@
+{% load crispy_forms_tags %} {% load static %}
+<html>
+<style>
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        color: #ffffff;
+    }
+
+    .container {
+        background-color: #282827;
+        width: 700px;
+        /* adjust this to the proper width */
+        height: cover;
+        margin: 0 auto;
+        margin-bottom: 80;
+    }
+</style>
+<div class="container">
+    <center><br>
+        <font color=f4511e size="+3">Edit Team</font><br><br>
+        <form method="POST" action="">
+            {% csrf_token %} {{ form|crispy }}
+            <br>
+            <button class="button" style="vertical-align:middle">
+        <span>Finish</span>
+      </button><br><br>
+        </form>
+    </center>
+</div>
+
+<body>
+    <div class="footer">
+        <footer>
+            Copyright 2020, The Sluggers
+        </footer>
+    </div>
+</body>
+</html>

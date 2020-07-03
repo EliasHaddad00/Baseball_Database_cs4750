@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'team',
     'player',
     'account',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
