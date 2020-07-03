@@ -5,4 +5,5 @@ app_name = "profile"
 
 urlpatterns = [
     path('', views.view, name='view'),
+    path('create/', views.create, name="create")
 ]

@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="card shadow p-4 border rounded-corner mt-5">
-    <h1>Joe Bullock</h1>
+    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
     <h3 class="text-muted"><a href="#" class="text-decoration-none">Washington Nationals</a></h3><br>
     <ul class="nav nav-pills nav-fill mt-3">
         <li class="nav-item"><a class="nav-link active rounded-corner" data-toggle="tab" href="#contactinfo">Contact Info</a></li>
@@ -14,9 +14,9 @@
                 <h4>Emergency Contact</h4>
                 <hr class="mt-0 mb-1">
                 <p>
-                    <strong>Joe Bullock</strong><br>
+                    <strong>{{ user.first_name }} {{ user.last_name }}</strong><br>
                     <a href="#" class="text-decoration-none">(703) 703-7037</a><br>
-                    <a href="#" class="text-decoration-none">jb@jb.com</a>
+                    <a href="mailto:{{ user.email }}" class="text-decoration-none">{{ user.email }}</a>
                 </p>
             </div>
         </div> 
