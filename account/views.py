@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login, authenticate
 
-
 @login_required
 def view(request):
     return render(template_name='account/view.html', request=request)
