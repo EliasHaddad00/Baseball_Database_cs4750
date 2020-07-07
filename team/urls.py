@@ -5,4 +5,5 @@ app_name = "team"
 
 urlpatterns = [
     path('', views.view, name='view'),
+    path('edit/', views.edit, name='edit'),
 ]

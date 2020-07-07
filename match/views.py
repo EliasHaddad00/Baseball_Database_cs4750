@@ -16,3 +16,7 @@ def edit(request):
 
     if request.method == "POST":
         return redirect(reverse('match:view'))
+
+@login_required
+def delete(request):
+    return redirect(reverse('team:edit'))

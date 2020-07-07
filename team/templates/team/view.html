@@ -5,7 +5,7 @@
 <div class="card shadow p-4 border rounded-corner mt-5">
     <div class="d-flex flex-horizontal justify-content-between align-items-center">
         <h1>Washington Nationals</h1>
-        {% if user.is_authenticated %}<a class="btn btn-primary rounded-corner" href="{% url 'player:edit' %}">Edit <i class="fa fa-pencil"></i></a>{% endif %}
+        {% if user.is_authenticated %}<a class="btn btn-primary rounded-corner" href="{% url 'team:edit' %}">Edit <i class="fa fa-pencil"></i></a>{% endif %}
     </div>  
     <h3 class="text-muted">4th - Minor League<br>14W 7L 1T</h3>
     <ul class="nav nav-pills nav-fill mt-3">
@@ -20,6 +20,7 @@
                 <hr class="mt-0 mb-1">
                 <div class="d-flex flex-horizontal">
                     <a href="{% url 'match:view' %}" class="text-decoration-none">Sat, Sept. 14th - <span class="font-weight-bold">Home</span> v. LA Dodgers (17th, 1-14-2)</a>
+
                 </div>
                 <br>
                 <h4>Upcoming Games</h4>

@@ -2,26 +2,26 @@
 
 {% block content %}
 <div class="card shadow p-4 border rounded-corner mt-5">
-    <form method='POST' action="{% url 'player:edit' %}">
+    <form method='POST' action="{% url 'player:create' %}">
         {% csrf_token %}
         <div class="d-flex flex-horizontal justify-content-between align-items-center">
-            <h1>Edit Player</h1>
+            <h1>New Player</h1>
             <button type="submit" class="btn btn-primary rounded-corner">Save <i class="fa fa-floppy-o"></i></button>
         </div>        
         <div class="form-row">
             <div class="col form-group">
                 <label for="fname">First Name</label>
-                <input type="text" class="form-control" id="fname" name="first_name" value="John">
+                <input type="text" class="form-control" id="fname" name="first_name">
             </div>
             <div class="col form-group">
                 <label for="lname">Last Name</label>
-                <input type="text" class="form-control" id="lname" name="last_name" value="Bullock">
+                <input type="text" class="form-control" id="lname" name="last_name">
             </div>
         </div>
 
         <div class="form-group">
             <label for="postition">Position</label>
-            <input type="text" class="form-control" id="postition" name="postition" value="3B">
+            <input type="text" class="form-control" id="postition" name="postition">
         </div>
 
         <div class="form-group">
@@ -48,13 +48,13 @@
                 <div class="card shadow p-3 border rounded-corner">
                     <h4>Uniform Number</h4>
                     <div class="form-group">
-                        <input type="number" class="form-control" id="uniform_number" name="uniform_number" value="15">
+                        <input type="number" class="form-control" id="uniform_number" name="uniform_number">
                     </div>
                     <br>
 
                     <h4>Date of Birth</h4>
                     <div class="form-group">
-                        <input type="date" class="form-control" id="dob" name="dob" value="1999-10-10">
+                        <input type="date" class="form-control" id="dob" name="dob">
                     </div>
                     <br>
 
@@ -62,20 +62,20 @@
                     <div class="form-row">
                         <div class="col form-group">
                             <label for="emer_first_name">First Name</label>
-                            <input type="text" class="form-control" id="emer_first_name" name="emer_first_name" value="Joe">
+                            <input type="text" class="form-control" id="emer_first_name" name="emer_first_name">
                         </div>
                         <div class="col form-group">
                             <label for="emer_last_name">Last Name</label>
-                            <input type="text" class="form-control" id="emer_last_name" name="emer_last_name" value="Bullock">
+                            <input type="text" class="form-control" id="emer_last_name" name="emer_last_name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="emer_phone_number">Phone Number</label>
-                        <input type="tel" class="form-control" id="emer_phone_number" name="emer_phone_number" value="703-703-7037" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <input type="tel" class="form-control" id="emer_phone_number" name="emer_phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
                     </div>
                     <div class="form-group">
                         <label for="emer_email">Email Address</label>
-                        <input type="email" class="form-control" id="emer_email" name="emer_email" value="joe@joe.joe">
+                        <input type="email" class="form-control" id="emer_email" name="emer_email">
                     </div>
 
                 </div>
@@ -91,18 +91,18 @@
                         </thead>
                         <tr>
                             <th scope="row">Games Played</th>
-                            <td><input type="number" value="10"></td>
+                            <td><input type="number"></td>
                             <td>-</td>
                         </tr>
                         <tr>
                             <th scope="row">Innings Pitched</th>
-                            <td><input type="number" value="17"></td>
-                            <td>1.7</td>
+                            <td><input type="number"></td>
+                            <td>-</td>
                         </tr>
                         <tr>
                             <th scope="row">Hits Allowed</th>
-                            <td><input type="number" value="86"></td>
-                            <td>8.6</td>
+                            <td><input type="number"></td>
+                            <td>-</td>
                         </tr>
                     </table>
                     <br>
@@ -115,18 +115,18 @@
                         </thead>
                         <tr>
                             <th scope="row">Games Played</th>
-                            <td><input type="number" value="10"></td>
+                            <td><input type="number"></td>
                             <td>-</td>
                         </tr>
                         <tr>
                             <th scope="row">At Bats</th>
-                            <td><input type="number" value="36"></td>
-                            <td>3.6</td>
+                            <td><input type="number"></td>
+                            <td>-</td>
                         </tr>
                         <tr>
                             <th scope="row">Singles</th>
-                            <td><input type="number" value="12"></td>
-                            <td>1.2</td>
+                            <td><input type="number"></td>
+                            <td>-</td>
                         </tr>
                     </table>
                 </div>
