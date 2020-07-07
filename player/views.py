@@ -8,4 +8,4 @@ def edit(request):
         return render(template_name='player/edit.html', request=request)
 
     if request.method == 'POST':
-        return redirect(reverse('team:view'))
+        return redirect(reverse('player:view'))

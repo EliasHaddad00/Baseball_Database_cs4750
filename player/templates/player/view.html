@@ -2,7 +2,10 @@
 
 {% block content %}
 <div class="card shadow p-4 border rounded-corner mt-5">
-    <h1>John Bullock</h1>
+    <div class="d-flex flex-horizontal justify-content-between align-items-center">
+        <h1>John Bullock</h1>
+        {% if user.is_authenticated %}<a class="btn btn-primary rounded-corner" href="{% url 'player:edit' %}">Edit <i class="fa fa-pencil"></i></a>{% endif %}
+    </div>  
     <h3 class="text-muted">3B - <a href="{% url 'team:view' %}" class="text-decoration-none">Washington Nationals</a></h3><br>
     <ul class="nav nav-pills nav-fill mt-3">
         <li class="nav-item"><a class="nav-link active rounded-corner" data-toggle="tab" href="#playerinfo">Player Info</a></li>

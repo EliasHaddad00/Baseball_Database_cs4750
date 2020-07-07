@@ -2,6 +2,10 @@
 
 {% block content %}
 <div class="card shadow p-4 border rounded-corner mt-5">
+    <div class="d-flex flex-horizontal justify-content-between align-items-center">
+        <h1>Match Info</h1>
+        {% if user.is_authenticated %}<a class="btn btn-primary rounded-corner" href="{% url 'match:edit' %}">Edit <i class="fa fa-pencil"></i></a>{% endif %}
+    </div>  
     <div class="row mx-0">
         <div class="col-6 text-center">
             <a href="{% url 'team:view' %}" class="text-decoration-none"><h1>Nationals</h1></a>

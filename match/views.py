@@ -15,4 +15,4 @@ def edit(request):
         return render(template_name="match/edit.html", request=request)
 
     if request.method == "POST":
-        return redirect(reverse('team:view'))
+        return redirect(reverse('match:view'))
