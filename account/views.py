@@ -26,4 +26,6 @@ def login(request):
         auth_login(request, u)
         return redirect(reverse('profile:view'))
     elif request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect(reverse('sluggers:landing'))
         return render(template_name='account/login.html', request=request)
