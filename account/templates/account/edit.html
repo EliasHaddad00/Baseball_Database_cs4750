@@ -1,0 +1,62 @@
+{% extends 'sluggers/base.html' %}
+
+{% block content %}
+<div class="card shadow p-4 border rounded-corner mt-5">
+    <form method="post" action="{% url 'profile:edit' %}">
+        {% csrf_token %}
+        <div class="d-flex flex-horizontal justify-content-between align-items-center">
+            <h1>Edit Profile</h1>
+            <button type="submit" class="btn btn-primary rounded-corner">Save <i class="fa fa-floppy-o"></i></button>
+        </div>
+        <div class="form-row">
+            <div class="col form-group">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" id="fname" name="first_name" value="{{ user.first_name }}">
+            </div>
+            <div class="col form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" id="lname" name="last_name" value="{{ user.last_name }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="email" name="email" value="{{ user.email }}">
+        </div>
+
+        <div class="form-group">
+            <label for="password">New Password</label>
+            <input type="password" class="form-control" id="password" aria-describedby="password" name='password'>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="phone" class="form-control" id="phone" aria-describedby="phone" >
+        </div>
+
+        <div class="form-group">
+            <label for="agegroup">Age Group</label>
+            <select class="form-control" id="agegroup">
+                <option>Majors</option>
+                <option>Minors</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="team">Team</label>
+            <select class="form-control" id="team">
+                <option>Washington Nationals</option>
+                <option>LA Dodgers</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="player">Player</label>
+            <select class="form-control" id="player">
+                <option>Nick Winans</option>
+                <option>John Bullock</option>
+            </select>
+        </div>
+    </form>
+</div>
+{% endblock %}
