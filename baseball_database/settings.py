@@ -73,7 +73,7 @@ WSGI_APPLICATION = 'baseball_database.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Baseball',
+        'NAME': 'sluggers',
         'USER': 'postgres',
         'PASSWORD': 'style',
         'HOST': '127.0.0.1',
