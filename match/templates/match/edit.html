@@ -1,0 +1,252 @@
+{% extends 'sluggers/base.html' %}
+
+{% block content %}
+<div class="card shadow p-4 border rounded-corner mt-5">
+    <form method="post" action="{% url 'match:edit' %}">
+        {% csrf_token %}
+        <div class="d-flex flex-horizontal justify-content-between">
+            <h1>Edit Match</h1>
+            <button type="submit" class="btn btn-primary rounded-corner">Save <i class="fa fa-floppy-o"></i></button>
+        </div>
+        <div class="form-group">
+            <label for="agegroup">Age Group</label>
+            <select class="form-control" id="agegroup">
+              <option>Majors</option>
+              <option>Minors</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <div class="col form-group">
+                <label for="home_team">Home Team</label>
+                <select class="form-control" id="home_team" name="home_team">
+                    <option>Washington Nationals</option>
+                    <option>LA Dodgers</option>
+                </select>
+            </div>
+            <div class="col form-group">
+                <label for="away_team">Home Team</label>
+                <select class="form-control" id="away_team" name="away_team">
+                    <option>Washington Nationals</option>
+                    <option>LA Dodgers</option>
+                </select>
+            </div>
+        </div>
+        
+        <ul class="nav nav-pills nav-fill mt-3">
+            <li class="nav-item"><a class="nav-link active rounded-corner" data-toggle="tab" href="#info">Game Info</a></li>
+            <li class="nav-item"><a class="nav-link rounded-corner" data-toggle="tab" href="#boxscore">Box Score</a></li>
+        </ul>
+        <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="info">
+                <div class="card shadow p-3 border rounded-corner">
+                    <div class="form-group">
+                        <h4>Game Date</h4>
+                        <input type="datetime-local" class="form-control" id="game_date" aria-describedby="game_date" name="game_date">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <h4>Field</h4>
+                        <select class="form-control" id="field">
+                          <option>Bird North</option>
+                          <option>Bird South</option>
+                        </select>
+                    </div>
+                </div>
+            </div> 
+            <div class="tab-pane fade" id="boxscore">
+                <div class="card shadow p-3 border rounded-corner">
+                    <div id="innings">
+                        <div class="card shadow p-3 border rounded-corner">
+                            <h4>Inning 1</h4>
+                            <table class="table center-justify">
+                                <thead class="table-active">
+                                    <th scope="col">&nbsp;</th>
+                                    <th scope="col">H</th>
+                                    <th scope="col">R</th>
+                                    <th scope="col">E</th>
+                                </thead>
+                                <tr>
+                                    <th scope="row">Home</th>
+                                    <td><input type="text" class="form-control" id="i1hh" name="i1hh"></td>
+                                    <td><input type="text" class="form-control" id="i1hr" name="i1hr"></td>
+                                    <td><input type="text" class="form-control" id="i1he" name="i1he"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Away</th>
+                                    <td><input type="text" class="form-control" id="i1ah" name="i1hh"></td>
+                                    <td><input type="text" class="form-control" id="i1ar" name="i1ar"></td>
+                                    <td><input type="text" class="form-control" id="i1ae" name="i1ae"></td>
+                                </tr>
+                            </table>
+                        </div></div>
+                    <div class="d-flex flex-horizontal justify-content-between pt-2">
+                        <button type="button" class="btn btn-primary rounded-corner" onclick="addInning()">Add Inning</button>
+                        <button type="button" class="btn btn-secondary rounded-corner" onclick="removeInning()">Remove Inning</button>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </form>
+</div>
+
+<script>
+    var last_inning = -1;
+
+    function addInning() {
+        if (last_inning < 0) last_inning = countInnings();
+
+        //update the last inning to reflect that we're addding one
+        last_inning++;
+        
+        //create the actual card that all elements will rest on/in
+        var card = document.createElement('div');
+        card.classList = "card shadow p-3 mt-2 border rounded-corner"
+
+        //create the inning number header
+        var inningNum = document.createElement("h4");
+        inningNum.innerHTML = "Inning " + last_inning;
+
+        //create the table
+        var table = document.createElement('table');
+        table.classList = "table center-justify";
+
+        //create the headers
+        var tableHeaderRow = document.createElement('thead');
+        tableHeaderRow.classList = 'table-active';
+
+        //header elements
+        var headerSpace = document.createElement('th');
+        headerSpace.scope = "col";
+        headerSpace.innerHTML = "&nbsp;";
+
+        var headerRuns = document.createElement('th');
+        headerRuns.scope = "col";
+        headerRuns.innerHTML = "R";
+
+        var headerHits = document.createElement('th');
+        headerHits.scope = "col";
+        headerHits.innerHTML = "H";
+
+        var headerErrors = document.createElement('th');
+        headerErrors.scope = "col";
+        headerErrors.innerHTML = "E";
+
+        //combine the table header elements
+        tableHeaderRow.appendChild(headerSpace);
+        tableHeaderRow.appendChild(headerRuns);
+        tableHeaderRow.appendChild(headerHits);
+        tableHeaderRow.appendChild(headerErrors);
+
+        //home team row
+        var homeTeamRow = document.createElement('tr');
+        
+        //home team elements
+        var homeTeamIdentifier = document.createElement('th');
+        homeTeamIdentifier.scope = "row";
+        homeTeamIdentifier.innerHTML = "Home";
+
+        var homeRunsContainer = document.createElement('td');
+        var homeHitsContainer = document.createElement('td');
+        var homeErrorsContainer = document.createElement('td');
+
+        var homeRuns = document.createElement('input');
+        homeRuns.type = "number";
+        homeRuns.classList = "form-control";
+        homeRuns.id = 'i' + last_inning + 'hr';
+        homeRuns.name = 'i' + last_inning + 'hr';
+
+        var homeHits = document.createElement('input');
+        homeHits.type = "number";
+        homeHits.classList = "form-control";
+        homeHits.id = 'i' + last_inning + 'hh';
+        homeHits.name = 'i' + last_inning + 'hh';
+
+        var homeErrors = document.createElement('input');
+        homeErrors.type = "number";
+        homeErrors.classList = "form-control";
+        homeErrors.id = 'i' + last_inning + 'he';
+        homeErrors.name = 'i' + last_inning + 'he';
+
+        //combine home team elements
+        homeRunsContainer.appendChild(homeRuns);
+        homeHitsContainer.appendChild(homeHits);
+        homeErrorsContainer.appendChild(homeErrors);
+
+        homeTeamRow.appendChild(homeTeamIdentifier);
+        homeTeamRow.appendChild(homeRunsContainer);
+        homeTeamRow.appendChild(homeHitsContainer);
+        homeTeamRow.appendChild(homeErrorsContainer);
+
+        //away team row
+        var awayTeamRow = document.createElement('tr');
+        
+        //away team elements
+        var awayTeamIdentifier = document.createElement('th');
+        awayTeamIdentifier.scope = "row";
+        awayTeamIdentifier.innerHTML = "Away";
+
+        var awayRunsContainer = document.createElement('td');
+        var awayHitsContainer = document.createElement('td');
+        var awayErrorsContainer = document.createElement('td');
+
+        var awayRuns = document.createElement('input');
+        awayRuns.type = "number";
+        awayRuns.classList = "form-control";
+        awayRuns.id = 'i' + last_inning + 'ar';
+        awayRuns.name = 'i' + last_inning + 'ar';
+
+        var awayHits = document.createElement('input');
+        awayHits.type = "number";
+        awayHits.classList = "form-control";
+        awayHits.id = 'i' + last_inning + 'ah';
+        awayHits.name = 'i' + last_inning + 'ah';
+
+        var awayErrors = document.createElement('input');
+        awayErrors.type = "number";
+        awayErrors.classList = "form-control";
+        awayErrors.id = 'i' + last_inning + 'ae';
+        awayErrors.name = 'i' + last_inning + 'ae';
+
+        //combine away team elements
+        awayRunsContainer.appendChild(awayRuns);
+        awayHitsContainer.appendChild(awayHits);
+        awayErrorsContainer.appendChild(awayErrors);
+
+        awayTeamRow.appendChild(awayTeamIdentifier);
+        awayTeamRow.appendChild(awayRunsContainer);
+        awayTeamRow.appendChild(awayHitsContainer);
+        awayTeamRow.appendChild(awayErrorsContainer);
+
+        //combine the table elements
+        table.appendChild(tableHeaderRow);
+        table.appendChild(homeTeamRow);
+        table.appendChild(awayTeamRow);
+
+        //combine the card elements
+        card.appendChild(inningNum);
+        card.appendChild(table);
+
+        //add the newly created card to the page
+        document.getElementById('innings').appendChild(card);
+    }
+
+    function countInnings() {
+        return document.getElementById('innings').children.length;
+    }
+
+    function removeInning() {
+        if (document.getElementById('innings').children.length > 0) {
+            console.log(document.getElementById('innings').lastChild);
+            document.getElementById('innings').removeChild(document.getElementById('innings').lastChild);
+            last_inning--;
+        } else {
+            print();
+        }
+    }
+
+    function save() {
+
+    }
+</script>
+{% endblock %}
