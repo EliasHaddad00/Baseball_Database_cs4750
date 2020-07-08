@@ -59,7 +59,7 @@ for team in team_names:
                 battingFile.write(batting_insert)
 
     if team=='Philadelphia Phillies':
-        creating = "INSERT INTO TEAM VALUES('0005','0002', '0002', '0004','Mets' '10','2')\n"
+        creating = "INSERT INTO TEAM VALUES('0005','0002', '0002', '0004','Phillies' '10','2')\n"
         philliesFile.write(creating)
         for i in range(9, 18):
             id = (i + 5)
