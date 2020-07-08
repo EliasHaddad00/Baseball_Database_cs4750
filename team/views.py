@@ -33,6 +33,10 @@ def edit(request, team_id):
         if len(future_games) > 0:
             context['next_game'] = future_games[0]
             context['upcoming_games'] = future_games[1:]
+
+        if len(past_games) > 0:
+            context['past_games'] = past_games
+
         context['team'] = team
         return render(template_name='team/edit.html', request=request, context=context)
 
