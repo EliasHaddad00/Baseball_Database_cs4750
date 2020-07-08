@@ -11,31 +11,35 @@
         <div class="form-row">
             <div class="col form-group">
                 <label for="fname">First Name</label>
-                <input type="text" class="form-control" id="fname" name="first_name">
+                <input type="text" class="form-control" id="fname" name="first_name" required>
             </div>
             <div class="col form-group">
                 <label for="lname">Last Name</label>
-                <input type="text" class="form-control" id="lname" name="last_name">
+                <input type="text" class="form-control" id="lname" name="last_name" required>
             </div>
         </div>
 
         <div class="form-group">
             <label for="postition">Position</label>
-            <input type="text" class="form-control" id="postition" name="postition">
+            <input type="text" class="form-control" id="position" name="position" required>
         </div>
 
         <div class="form-group">
             <label for="agegroup">Age Group</label>
-            <select class="form-control" id="agegroup">
-              <option>Majors</option>
-              <option>Minors</option>
+            <select class="form-control" id="agegroup" name="agegroup" onchange="updateTeams()" required>
+                {% for ag in agegroups %}
+                    <option value="{{ ag.age_group_id }}">{{ ag.age_group_desc }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="form-group">
             <label for="team">Team</label>
-            <select class="form-control" id="team">
-              <option>Washington Nationals</option>
-              <option>LA Dodgers</option>
+            <select class="form-control" id="team" name="team" required>
+                {% for team in teams %}
+                    {% if team.agegroup.age_group_id == 1 %}
+                        <option value="{{ team.team_id }}">{{ team.team_name }}</option>
+                    {% endif %}
+                {% endfor %}
             </select>
         </div>
 
@@ -48,7 +52,7 @@
                 <div class="card shadow p-3 border rounded-corner">
                     <h4>Uniform Number</h4>
                     <div class="form-group">
-                        <input type="number" class="form-control" id="uniform_number" name="uniform_number">
+                        <input type="number" class="form-control" id="uniform_number" name="uniform_number" required>
                     </div>
                     <br>
 
@@ -71,7 +75,7 @@
                     </div>
                     <div class="form-group">
                         <label for="emer_phone_number">Phone Number</label>
-                        <input type="tel" class="form-control" id="emer_phone_number" name="emer_phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <input type="tel" class="form-control" id="emer_phone_number" name="emer_phone_number" pattern="[0-9]{3}[0-9]{4}">
                     </div>
                     <div class="form-group">
                         <label for="emer_email">Email Address</label>
@@ -134,4 +138,24 @@
         </div>
     </form>
 </div>
+
+<script>
+    {% for ag in agegroups %}var ag{{ ag.age_group_id }} = '{% spaceless %}{% for t in ag.team_set.all %}<option value="{{ t.team_id }}">{{ t.team_name }}</option>{% endfor %}{% endspaceless %}';
+    {% endfor %}
+    function updateTeams() {
+        var id = document.getElementById("agegroup").value;
+        switch(id) {
+            {% for ag in agegroups %}
+            case '{{ ag.age_group_id }}':
+                document.getElementById("team").innerHTML = ag{{ ag.age_group_id }};
+                console.log(ag{{ag.age_group_id}});
+                break;
+            {% endfor %}
+            default:
+                document.getElementById("team").innerHTML = "";
+                console.log('hi')
+                break;
+        }
+    }
+</script>
 {% endblock %}
