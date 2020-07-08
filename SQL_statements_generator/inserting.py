@@ -7,6 +7,7 @@ fieldingFile = open("fieldingFile.txt","a")
 pitchingFile = open("pitchingFile.txt","a")
 battingFile = open("battingFile.txt","a")
 
+
 team_names=[
     'New York Mets',
     'Philadelphia Phillies',
@@ -34,8 +35,11 @@ last_names=['Halliday','Jenkins','Mason','Ellis','Ahmann','Daniels','Hall','Stou
 
 for team in team_names:
     if team=='New York Mets':
-        creating="INSERT INTO TEAM VALUES('0004','0003', '0003', '0004','Mets' '10','2')\n"
+        creating="INSERT INTO TEAM VALUES('0004','0003', '0003', '0004','Mets', '10','2');\n"
         metsFile.write(creating)
+        creating2 = "INSERT INTO STAFF VALUES('0004','0003', '0003');\n"
+        metsFile.write(creating2)
+
         for i in range(0,8):
             id = (i + 5)
             str1="INSERT INTO PLAYER VALUES('000"+str(id)+"',"+",'0004', '0004','"+str(i)+"',"+"'"+first_names[i] +"',"+"'"+last_names[i] +"',"+"'2008-07-20','Pitcher');\n"
@@ -59,8 +63,11 @@ for team in team_names:
                 battingFile.write(batting_insert)
 
     if team=='Philadelphia Phillies':
-        creating = "INSERT INTO TEAM VALUES('0005','0002', '0002', '0004','Phillies' '10','2')\n"
+        creating = "INSERT INTO TEAM VALUES('0005','0002', '0002', '0004','Phillies', '10','2');\n"
         philliesFile.write(creating)
+        creating2 = "INSERT INTO STAFF VALUES('0005','0002', '0002');\n"
+        philliesFile.write(creating2)
+
         for i in range(9, 18):
             id = (i + 5)
             str1="INSERT INTO PLAYER VALUES('000"+str(id)+"',"+",'0005', '0004','"+str(i)+"',"+"'"+first_names[i] +"',"+"'"+last_names[i] +"',"+"'2008-07-20','Pitcher');\n"
@@ -84,8 +91,11 @@ for team in team_names:
                 battingFile.write(batting_insert)
 
     if team=='Chicago Cubs':
-        creating = "INSERT INTO TEAM VALUES('0006','0001', '0003', '0004','Cubs' '10','2')\n"
+        creating = "INSERT INTO TEAM VALUES('0006','0001', '0003', '0004','Cubs', '10','2');\n"
         cubsFile.write(creating)
+        creating = "INSERT INTO STAFF VALUES('0006','0001', '0003');\n"
+        cubsFile.write(creating2)
+
         for i in range(19, 26):
             id=(i + 5)
             str1="INSERT INTO PLAYER VALUES('000"+str(id)+"',"+",'0006', '0004','"+str(i)+"',"+"'"+first_names[i] +"',"+"'"+last_names[i] +"',"+"'2008-07-20','Pitcher');\n"
@@ -109,8 +119,10 @@ for team in team_names:
                 battingFile.write(batting_insert)
 
     if team=='Cincinnati Reds':
-        creating = "INSERT INTO TEAM VALUES('0007','0003', '0002', '0004','Reds' '10','2')\n"
+        creating = "INSERT INTO TEAM VALUES('0007','0003', '0002', '0004','Reds', '10','2');\n"
         RedsFile.write(creating)
+        creating2 = "INSERT INTO STAFF VALUES('0007','0003', '0002');\n"
+        RedsFile.write(creating2)
         for i in range(27, 34):
             id = (i + 5)
             str1="INSERT INTO PLAYER VALUES('000"+str(id)+"',"+",'0007', '0004','"+str(i)+"',"+"'"+first_names[i] +"',"+"'"+last_names[i] +"',"+"'2008-07-20','Pitcher');\n"
@@ -132,4 +144,3 @@ for team in team_names:
                     random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "');\n"
                 pitchingFile.write(pitching_insert)
                 battingFile.write(batting_insert)
-
