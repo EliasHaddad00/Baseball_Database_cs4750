@@ -4,16 +4,16 @@
 <div class="card shadow p-4 border rounded-corner mt-5">
     <div class="d-flex flex-horizontal justify-content-between align-items-center">
         <h1>Match Info</h1>
-        {% if user.is_authenticated %}<a class="btn btn-primary rounded-corner" href="{% url 'match:edit' %}">Edit <i class="fa fa-pencil"></i></a>{% endif %}
+        {% if user.is_authenticated %}<a class="btn btn-primary rounded-corner" href="{% url 'match:edit' match.match_id %}">Edit <i class="fa fa-pencil"></i></a>{% endif %}
     </div>  
     <div class="row mx-0">
         <div class="col-6 text-center">
-            <a href="{% url 'team:view' %}" class="text-decoration-none"><h1>Nationals</h1></a>
-            <h3>3</h3>
+            <a href="{% url 'team:view' match.home_team.team_id %}" class="text-decoration-none"><h1>{{ match.home_team.team_name }}</h1></a>
+            <h3>{% if match.inning_set %}{{ match.home_score }}{% else %}-{% endif %}</h3>
         </div>
         <div class="col-6 text-center">
-            <a href="{% url 'team:view' %}" class="text-decoration-none"><h1>Dodgers</h1></a>
-            <h3>6</h3>
+            <a href="{% url 'team:view' match.away_team.team_id %}" class="text-decoration-none"><h1>{{ match.away_team.team_name }}</h1></a>
+            <h3>{% if match.inning_set %}{{ match.away_score }}{% else %}-{% endif %}</h3>
         </div>
     </div>
     
@@ -27,13 +27,12 @@
                 <h4>Game Date</h4>
                 <hr class="mt-0 mb-1">
                 <p>
-                    Saturday, September 14th<br>
-                    2:00 PM
+                    {{ match.match_date }}
                 </p>
                 <br>
                 <h4>Field</h4>
                 <hr class="mt-0 mb-1">
-                <p>Bird North</p>
+                <p>Bird North ---- NOT IMPLEMENTED</p>
             </div>
         </div> 
         <div class="tab-pane fade" id="boxscore">
@@ -41,48 +40,30 @@
                 <table class="table table-bordered center-justify">
                     <thead class="table-active">
                             <th scope="col">&nbsp;</th>
-                            <th scope="col">1</th>
-                            <th scope="col">2</th>
-                            <th scope="col">3</th>
-                            <th scope="col">4</th>
-                            <th scope="col">5</th>
-                            <th scope="col">6</th>
-                            <th scope="col">7</th>
-                            <th scope="col">8</th>
-                            <th scope="col">9</th>
+                            {% for inning in match.inning_set.all %}
+                                <th scope="col">{{ forloop.counter }}</th>
+                            {% endfor %}
                             <th scope="col">R</th>
                             <th scope="col">H</th>
                             <th scope="col">E</th>
                     </thead>
                     <tr>
-                        <th scope="row">Washington Nationals</th>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td class="font-weight-bold">3</td>
-                        <td class="font-weight-bold">8</td>
-                        <td class="font-weight-bold">1</td>
+                        <th scope="row">{{ match.home_team.team_name }}</th>
+                        {% for inning in match.inning_set.all %}
+                            <td>{{ inning.home_runs }}</td>
+                        {% endfor %}
+                        <td class="font-weight-bold">{{ match.home_score }}</td>
+                        <td class="font-weight-bold">{{ match.home_hits }}</td>
+                        <td class="font-weight-bold">{{ match.home_errors }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">LA Dodgers</th>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>4</td>
-                        <td class="font-weight-bold">6</td>
-                        <td class="font-weight-bold">12</td>
-                        <td class="font-weight-bold">0</td>
+                        <th scope="row">{{ match.away_team.team_name }}</th>
+                        {% for inning in match.inning_set.all %}
+                            <td>{{ inning.away_runs }}</td>
+                        {% endfor %}
+                        <td class="font-weight-bold">{{ match.away_score }}</td>
+                        <td class="font-weight-bold">{{ match.away_hits }}</td>
+                        <td class="font-weight-bold">{{ match.away_errors }}</td>
                     </tr>
                 </table>
             </div>

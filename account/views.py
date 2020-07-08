@@ -5,8 +5,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
 from django.db.utils import IntegrityError
 
+
+
+def red(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('profile:view', args=[request.user.id]))
+    else:
+        return redirect(reverse('profile:login'))
+
 @login_required
-def view(request):
+def view(request, profile_id):
     return render(template_name='account/view.html', request=request)
 
 def create(request):
@@ -38,7 +46,7 @@ def edit(request):
             u.save()
         except IntegrityError:
             return HttpResponse("This email address is already in use, please use a different one")
-        return redirect(reverse('profile:view'))
+        return redirect(reverse('profile:redirect'))
     elif request.method == 'GET':
         return render(template_name='account/edit.html', request=request)
 
@@ -49,7 +57,7 @@ def login(request):
         if u is None:
             return render(template_name='account/login.html', request=request)
         auth_login(request, u)
-        return redirect(reverse('profile:view'))
+        return redirect(reverse('profile:redirect'))
     elif request.method == 'GET':
         if request.user.is_authenticated:
             return redirect(reverse('sluggers:landing'))

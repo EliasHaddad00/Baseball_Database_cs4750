@@ -4,7 +4,7 @@
 {% block content %}
     <h2 class="my-4">Welcome to the Sluggers Database.</h2>
     <p>We're currently helping the Richmond Little League increase accessability to statistics!</p>
-    <a href="{% url 'team:view' %}">Example Team Page</a><br>
-    <a href="{% url 'match:view' %}">Example Match Page</a><br>
-    <a href="{% url 'player:view' %}">Example Player Page</a><br>
+    <a href="{% url 'team:view' 1 %}">Example Team Page</a><br>
+    <a href="{% url 'match:view' 1 %}">Example Match Page</a><br>
+    <a href="{% url 'player:view' 1 %}">Example Player Page</a><br>
 {% endblock %}

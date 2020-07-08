@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 
+from sluggers.models import Player
 
-def view(request):
-    return render(template_name='player/view.html', request=request)
+def view(request, player_id):
+    context = {'player': Player.objects.get(player_id=player_id)}
+    return render(template_name='player/view.html', request=request, context=context)
 
 @login_required
-def edit(request):
+def edit(request, player_id):
     if request.method == "GET":
         return render(template_name='player/edit.html', request=request)
 
@@ -22,5 +24,5 @@ def create(request):
         return redirect(reverse('team:edit'))
 
 @login_required
-def delete(request):
+def delete(request, player_id):
     return redirect(reverse('team:edit'))

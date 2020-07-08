@@ -4,8 +4,8 @@ from . import views
 app_name = "player"
 
 urlpatterns = [
-    path('', views.view, name='view'),
-    path('edit/', views.edit, name='edit'),
-    path('delete/', views.delete, name='delete'),
+    path('<int:player_id>', views.view, name='view'),
+    path('<int:player_id>/edit/', views.edit, name='edit'),
+    path('<int:player_id>/delete/', views.delete, name='delete'),
     path('new/', views.create, name='create')
 ]
