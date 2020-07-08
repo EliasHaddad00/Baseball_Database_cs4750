@@ -9,28 +9,6 @@
             <a class="btn btn-primary rounded-corner" href="{% url 'profile:logout' %}">Logout</a>
         {% endif %}
     </div>  
-    <h3 class="text-muted"><a href="{% url 'team:view' %}" class="text-decoration-none">Washington Nationals</a></h3><br>
-    <ul class="nav nav-pills nav-fill mt-3">
-        <li class="nav-item"><a class="nav-link active rounded-corner" data-toggle="tab" href="#contactinfo">Contact Info</a></li>
-        <li class="nav-item"><a class="nav-link rounded-corner" data-toggle="tab" href="#player">Player</a></li>
-    </ul>
-    <div class="tab-content mt-3">
-        <div class="tab-pane fade show active" id="contactinfo">
-            <div class="card shadow p-3 border rounded-corner">
-                <h4>Emergency Contact</h4>
-                <hr class="mt-0 mb-1">
-                <p>
-                    <strong>{{ user.first_name }} {{ user.last_name }}</strong><br>
-                    <a href="#" class="text-decoration-none">(703) 703-7037</a><br>
-                    <a href="mailto:{{ user.email }}" class="text-decoration-none">{{ user.email }}</a>
-                </p>
-            </div>
-        </div> 
-        <div class="tab-pane fade" id="player">
-            <div class="card shadow p-3 border rounded-corner">
-                <p class="mb-0"><a href="{% url 'player:view' %}" class="text-decoration-none">John Bullock</a></p>
-            </div>
-        </div>
-    </div>
+    <h3><i>Administrator</i></h3>
 </div>
 {% endblock %}

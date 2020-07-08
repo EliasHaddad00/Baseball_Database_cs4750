@@ -24,7 +24,7 @@ def create(request):
         u.last_name = request.POST.get('last_name')
         u.save()
         auth_login(request, u)
-        return redirect(reverse('profile:view'))
+        return redirect(reverse('profile:redirect'))
     elif request.method == 'GET':
         return render(template_name='account/create.html', request=request)
 
