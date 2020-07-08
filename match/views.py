@@ -87,5 +87,6 @@ def edit(request, match_id):
         return redirect(reverse('match:view', args=[match_id]))
 
 @login_required
-def delete(request, match_id):
-    return redirect(reverse('team:edit'))
+def delete(request, match_id, return_id):
+    Match.objects.get(match_id=match_id).delete()
+    return redirect(reverse('team:edit', args=[return_id]))
