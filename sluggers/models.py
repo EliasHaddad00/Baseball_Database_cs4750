@@ -7,18 +7,18 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 
 from django.db import models
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from datetime import datetime
 
-USER_TYPES = [
-    (0, 'Coach'),
-    (1, 'Manager'),
-    (2, 'Parent'),
-]
+#USER_TYPES = [
+#    (0, 'Coach'),
+#    (1, 'Manager'),
+#    (2, 'Parent'),
+#]
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_type = models.IntegerField(choices=USER_TYPES, name='Profile Type', default=2)
+#class Profile(models.Model):
+#    user = models.OneToOneField(User, on_delete=models.CASCADE)
+#    user_type = models.IntegerField(choices=USER_TYPES, name='Profile Type', default=2)
 
 class AgeGroup(models.Model):
     age_group_id = models.IntegerField(primary_key=True)
@@ -27,6 +27,7 @@ class AgeGroup(models.Model):
     age_group_end = models.DateField(blank=True, null=True)
 
     class Meta:
+        managed=False
         db_table = 'age_group'
 
 class Coach(models.Model):
@@ -37,6 +38,7 @@ class Coach(models.Model):
     coach_email = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
+        managed=False
         db_table = 'coach'
 
 class EmergencyContact(models.Model):
@@ -47,6 +49,7 @@ class EmergencyContact(models.Model):
     contact_email = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
+        managed=False
         db_table = 'emergency_contact'
 
 class Manager(models.Model):
@@ -57,6 +60,7 @@ class Manager(models.Model):
     manager_email = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
+        managed=False
         db_table = 'manager'
 
 class Team(models.Model):
@@ -69,16 +73,19 @@ class Team(models.Model):
     losses = models.IntegerField(blank=True, null=True)
 
     class Meta:
+        managed=False
         db_table = 'team'
 
 
 class Staff(models.Model):
-    manager = models.ForeignKey(Manager, models.DO_NOTHING, blank=True, null=True)
-    coach = models.ForeignKey(Coach, models.DO_NOTHING, blank=True, null=True)
-    team = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True)
+    manager = models.OneToOneField(Manager, models.DO_NOTHING, primary_key=True)
+    coach = models.ForeignKey(Coach, models.DO_NOTHING)
+    team = models.ForeignKey('Team', models.DO_NOTHING)
 
     class Meta:
+        managed = False
         db_table = 'staff'
+        unique_together = (('manager', 'coach', 'team'),)
 
 
 class Player(models.Model):
@@ -92,6 +99,7 @@ class Player(models.Model):
     position = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
+        managed=False
         db_table = 'player'
 
 class PitchingStats(models.Model):
@@ -109,6 +117,7 @@ class PitchingStats(models.Model):
         return [(field.name.replace("_", " "), field.value_to_string(self)) for field in PitchingStats._meta.fields if field.name not in "player"]
 
     class Meta:
+        managed=False
         db_table = 'pitching_stats'
 
 
@@ -123,6 +132,7 @@ class FieldingStats(models.Model):
         return [(field.name.replace("_", " "), field.value_to_string(self)) for field in FieldingStats._meta.fields if field.name not in "player"]
 
     class Meta:
+        managed=False
         db_table = 'fielding_stats'
 
 
@@ -145,6 +155,7 @@ class BattingStats(models.Model):
         return [(field.name.replace("_", " "), field.value_to_string(self)) for field in BattingStats._meta.fields if field.name not in "player"]
 
     class Meta:
+        managed=False
         db_table = 'batting_stats'
 
 
@@ -173,6 +184,7 @@ class Match(models.Model):
         return sum(i.away_errors for i in self.inning_set.all())
 
     class Meta:
+        managed=False
         db_table = 'match'
 
 
@@ -187,4 +199,5 @@ class Inning(models.Model):
     away_errors = models.IntegerField(blank=True, null=True)
 
     class Meta:
+        managed=False
         db_table = 'inning'
