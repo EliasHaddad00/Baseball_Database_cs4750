@@ -49,7 +49,7 @@
                                 <th scope="row">{{ name|capfirst }}</th>   
                                 <td>{{ value }}</td>
                             </tr>
-                        {% endfor %}
+                        {% endfor %}</th> 
                     </table>
                 {% endif %}
                 
@@ -88,17 +88,26 @@
         </div> 
         <div class="tab-pane fade" id="graphs">
             <div class="card shadow p-3 border rounded-corner">
+                
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <script type="text/javascript">
                   google.charts.load("current", {packages:['corechart']});
                   google.charts.setOnLoadCallback(drawChart);
+                  
+                  let elements = [];
+                  for(x=0; x<len(player.pitchingstats.get_fields); x++){
+                      name = player.pitchingstats.get_fields[0];
+                      value = player.pitchingstats.get_fields[1];
+                      elements.push([name, value, "silver"]);
+                      //console.log(name);
+                  };
                   function drawChart() {
                     var data = google.visualization.arrayToDataTable([
-                      ["Element", "Density", { role: "style" } ],
+                      ["Type", "Stat", { role: "style" } ],
                       ["Copper", 8.94, "#b87333"],
-                      ["Silver", 10.49, "silver"],
-                      ["Gold", 19.30, "gold"],
-                      ["Platinum", 21.45, "color: #e5e4e2"]
+                      //["Silver", 10.49, "silver"],
+                      //["Gold", 19.30, "gold"],
+                      //["Platinum", 21.45, "color: #e5e4e2"]
                     ]);
               
                     var view = new google.visualization.DataView(data);
@@ -110,7 +119,7 @@
                                      2]);
               
                     var options = {
-                      title: "Density of Precious Metals, in g/cm^3",
+                      title: "Summary of Player Statistics",
                       width: 600,
                       height: 400,
                       bar: {groupWidth: "95%"},
