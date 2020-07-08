@@ -9,34 +9,41 @@
         {% csrf_token %}
         <div class="form-group">
             <label for="agegroup">Age Group</label>
-            <select class="form-control" id="agegroup">
-              <option>Majors</option>
-              <option>Minors</option>
+            <select class="form-control" id="agegroup" onchange="updateTeams()" required>
+                {% for ag in agegroups %}
+                    <option value="{{ ag.age_group_id }}">{{ ag.age_group_desc }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="form-row">
             <div class="col form-group">
                 <label for="home_team">Home Team</label>
-                <select class="form-control" id="home_team" name="home_team">
-                    <option>Washington Nationals</option>
-                    <option>LA Dodgers</option>
+                <select class="form-control" id="home_team" name="home_team" required>
+                    {% for team in teams %}
+                        {% if team.agegroup.age_group_id == 1 %}
+                            <option value="{{ team.team_id }}">{{ team.team_name }}</option>
+                        {% endif %}
+                    {% endfor %}
                 </select>
             </div>
             <div class="col form-group">
                 <label for="away_team">Home Team</label>
-                <select class="form-control" id="away_team" name="away_team">
-                    <option>Washington Nationals</option>
-                    <option>LA Dodgers</option>
+                <select class="form-control" id="away_team" name="away_team" required>
+                    {% for team in teams %}
+                        {% if team.agegroup.age_group_id == 1 %}
+                            <option value="{{ team.team_id }}">{{ team.team_name }}</option>
+                        {% endif %}
+                    {% endfor %}
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label for="game_date">Game Date and Time</label>
-            <input type="datetime-local" class="form-control" id="game_date" aria-describedby="game_date" name="game_date">
+            <input type="date" class="form-control" id="game_date" aria-describedby="game_date" name="game_date">
         </div>
         <div class="form-group">
             <label for="field">Field</label>
-            <select class="form-control" id="field">
+            <select class="form-control" id="field" name="field">
               <option>Bird North</option>
               <option>Bird South</option>
             </select>
@@ -44,4 +51,24 @@
         <input type="submit" value="Create" class="btn btn-primary"/>
     </form>
 </div>
+
+<script>
+    {% for ag in agegroups %}var ag{{ ag.age_group_id }} = '{% spaceless %}{% for t in ag.team_set.all %}<option value="{{ t.team_id }}">{{ t.team_name }}</option>{% endfor %}{% endspaceless %}';
+    {% endfor %}
+    function updateTeams() {
+        var id = document.getElementById("agegroup").value;
+        switch(id) {
+            {% for ag in agegroups %}
+            case '{{ ag.age_group_id }}':
+                document.getElementById("home_team").innerHTML = ag{{ ag.age_group_id }};
+                document.getElementById("away_team").innerHTML = ag{{ ag.age_group_id }};
+                break;
+            {% endfor %}
+            default:
+                document.getElementById("home_team").innerHTML = '';
+                document.getElementById("away_team").innerHTML = '';
+                break;
+        }
+    }
+</script>
 {% endblock %}
