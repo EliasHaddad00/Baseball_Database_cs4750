@@ -26,6 +26,9 @@ class AgeGroup(models.Model):
     age_group_start = models.DateField(blank=True, null=True)
     age_group_end = models.DateField(blank=True, null=True)
 
+    def slug_name(self):
+        return self.age_group_desc.replace("-", "")
+
     class Meta:
         db_table = 'age_group'
 

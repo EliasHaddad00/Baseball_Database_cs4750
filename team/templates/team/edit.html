@@ -3,7 +3,7 @@
 {% block content %}
 <!-- Team Summary -->
 <div class="card shadow p-4 border rounded-corner mt-5">
-    <form method="POST" action="{% url 'team:edit' %}">
+    <form method="POST" action="{% url 'team:edit' team.team_id %}">
         {% csrf_token %}
         <div class="d-flex flex-horizontal justify-content-between align-items-center">
             <h1>Edit Team</h1>
@@ -11,7 +11,7 @@
         </div>  
         <div class="form-group">
             <label for="team_name">Team Name</label>
-            <input type="text" class="form-control" id="team_name" name="team_name" value="Washington Nationals">
+            <input type="text" class="form-control" id="team_name" name="team_name" value="{{ team.team_name }}">
         </div>
         <ul class="nav nav-pills nav-fill mt-3">
             <li class="nav-item"><a class="nav-link active rounded-corner" data-toggle="tab" href="#schedule">Schedule</a></li>
@@ -20,26 +20,44 @@
         <div class="tab-content mt-3">
             <div class="tab-pane fade show active" id="schedule">
                 <div class="card shadow p-3 border rounded-corner">
-                    <h4>Next Game</h4>
-                    <hr class="mt-0 mb-1">
-                    <div class="d-flex flex-horizontal">
-                        <a href="{% url 'match:view' %}" class="text-decoration-none">Sat, Sept. 14th - <span class="font-weight-bold">Home</span> v. LA Dodgers (17th, 1-14-2)</a>
-                        <a href="{% url 'match:delete' %}" class="text-decoration-none ml-auto">delete</a>
-                    </div>
-                    <br>
-                    <h4>Upcoming Games</h4>
-                    <hr class="mt-0 mb-1">
-                    <div class="d-flex flex-horizontal">
-                        <a href="{% url 'match:view' %}" class="text-decoration-none">Sun, Sept. 15th - Away at <span class="font-weight-bold">Boston Red Sox</span> (1st, 20-0-0)</a>
-                        <a href="{% url 'match:delete' %}" class="text-decoration-none ml-auto">delete</a>
-                    </div>
-                    <br>
-                    <h4>Past Results</h4>
-                    <hr class="mt-0 mb-1">
-                    <div class="d-flex flex-horizontal">
-                        <a href="{% url 'match:view' %}" class="text-decoration-none">Sun, Sept. 8th - <span class="font-weight-bold">W (7-5)</span> - Chicago Cubs</a>
-                        <a href="{% url 'match:delete' %}" class="text-decoration-none ml-auto">delete</a>
-                    </div>
+                    {% if next_game %}
+                        <h4>Next Game</h4>
+                        <hr class="mt-0 mb-1">
+                        {% with game=next_game %}
+                            <div class="d-flex flex-horizontal">
+                                <a href="{% url 'match:view' game.match_id %}" class="text-decoration-none">{{ game.match_date }} - {% if game.home_team == team %}<span class="font-weight-bold">Home</span> vs. {{ game.away_team.team_name }}{% else %}Away at <span class="font-weight-bold">{{ game.home_team.team_name }}</span>{% endif %}</a>
+                                <a href="{% url 'match:delete' game.match_id %}" class="text-decoration-none ml-auto">delete</a>
+                            </div>
+                        {% endwith %}
+                    {% else %}
+                        <p><i>No upcoming matches</i></p>
+                    {% endif %}
+
+                    {% if upcoming_games|length > 0 %}
+                        <h4>Upcoming Games</h4>
+                        <hr class="mt-0 mb-1">
+                        {% for game in upcoming_games %}
+                            <div class="d-flex flex-horizontal">
+                                <a href="{% url 'match:view' game.match_id %}" class="text-decoration-none">{{ game.match_date }} - {% if game.home_team == team %}<span class="font-weight-bold">Home</span> vs. {{ game.away_team.team_name }}{% else %}Away at <span class="font-weight-bold">{{ game.home_team.team_name }}</span>{% endif %}</a>
+                                <a href="{% url 'match:delete' game.match_id %}" class="text-decoration-none ml-auto">delete</a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if past_games|length > 0 %}
+                        <h4>Past Results</h4>
+                        <hr class="mt-0 mb-1">
+                        {% for game in past_games %}
+                            <div class="d-flex flex-horizontal">
+                                <a href="{% url 'match:view' game.match_id %}" class="text-decoration-none">{{ game.match_date }} - {% if game.home_team == team %}{% if game.home_score > game.away_score %}W{% elif game.home_score == game.away_score %}T{% else %}L{% endif %} ({{ game.home_score }}-{{ game.away_score }}) - {{ game.away_team.team_name }}{% else %}{% if game.home_score > game.away_score %}L{% elif game.home_score == game.away_score %}T{% else %}W{% endif %} ({{ game.home_score }}-{{ game.away_score }}) - {{ game.home_team.team_name }}{% endif %}</a>
+                                <a href="{% url 'match:delete' game.match_id %}" class="text-decoration-none ml-auto">delete</a>
+                            </div>
+                        {% endfor %}
+                        
+                    {% else %}
+                        <p class="mb-0"><i>No past matches</i></p>
+                    {% endif %}
+
                     <div class="mt-3">
                         <a href="{% url 'match:create' %}" class="btn btn-primary rounded-corner">Create Match</a>
                     </div>
@@ -49,22 +67,25 @@
                 <div class="card shadow p-3 border rounded-corner">
                     <h4>Pitchers</h4>
                     <hr class="mt-0 mb-1">
-                    <div class="d-flex flex-horizontal">
-                        <a href="{% url 'player:view' %}" class="text-decoration-none">Nick Winans</a>
-                        <a href="{% url 'player:delete' %}" class="text-decoration-none ml-auto">delete</a>
-                    </div>
+                    {% for player in team.player_set.all %}
+                        {% if "Pitcher" in player.position %}
+                            <div class="d-flex flex-horizontal">
+                                <a href="{% url 'player:view' player.player_id %}" class="text-decoration-none">{{ player.first_name }} {{ player.last_name }}</a>
+                                <a href="{% url 'player:delete' player.player_id %}" class="text-decoration-none ml-auto">delete</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                     <br>
                     <h4>Fielders</h4>
                     <hr class="mt-0 mb-1">
-                    <div class="d-flex flex-horizontal">
-                        <a href="{% url 'player:view' %}" class="text-decoration-none">John Bullock</a>
-                        <a href="{% url 'player:delete' %}" class="text-decoration-none ml-auto">delete</a>
-
-                    </div>
-                    <div class="d-flex flex-horizontal">
-                        <a href="{% url 'player:view' %}" class="text-decoration-none">Elias Haddad</a>
-                        <a href="{% url 'player:delete' %}" class="text-decoration-none ml-auto">delete</a>
-                    </div>
+                    {% for player in team.player_set.all %}
+                        {% if "Pitcher" not in player.position %}
+                            <div class="d-flex flex-horizontal">
+                                <a href="{% url 'player:view' player.player_id %}" class="text-decoration-none">{{ player.first_name }} {{ player.last_name }}</a>
+                                <a href="{% url 'player:delete' player.player_id %}" class="text-decoration-none ml-auto">delete</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                     <div class="mt-3">
                         <a href="{% url 'player:create' %}" class="btn btn-primary rounded-corner">Add Player</a>
                     </div>
