@@ -1,4 +1,4 @@
-INSERT INTO TEAM VALUES('0005','0002', '0002', '0004','Mets' '10','2')
+INSERT INTO TEAM VALUES('0005','0002', '0002', '0004','Phillies' '10','2')
 INSERT INTO PLAYER VALUES('00014',,'0005', '0004','9','Ivy','Herzog','2008-07-20','Pitcher');
 INSERT INTO PLAYER VALUES('00015',,'0005', '0004','10','Raymond','Moore','2008-07-20','Pitcher');
 INSERT INTO PLAYER VALUES('00016',,'0005', '0004','11','Dan','Boyles','2008-07-20','Pitcher');
