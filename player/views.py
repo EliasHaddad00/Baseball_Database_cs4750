@@ -56,6 +56,7 @@ def create(request):
 
 @login_required
 def delete(request, player_id):
-    Player.objects.get(player_id=player_id).delete()
-    print("Deleted: " + str(player_id))
-    return redirect(reverse('team:edit'))
+    p = Player.objects.get(player_id=player_id)
+    id = p.team.team_id
+    p.delete()
+    return redirect(reverse('team:edit', args=[id]) + "#players")
