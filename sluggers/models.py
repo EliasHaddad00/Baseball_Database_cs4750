@@ -27,7 +27,6 @@ class AgeGroup(models.Model):
     age_group_end = models.DateField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'age_group'
 
 class Coach(models.Model):
@@ -38,7 +37,6 @@ class Coach(models.Model):
     coach_email = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'coach'
 
 class EmergencyContact(models.Model):
@@ -49,7 +47,6 @@ class EmergencyContact(models.Model):
     contact_email = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'emergency_contact'
 
 class Manager(models.Model):
@@ -60,7 +57,6 @@ class Manager(models.Model):
     manager_email = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'manager'
 
 class Team(models.Model):
@@ -73,7 +69,6 @@ class Team(models.Model):
     losses = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'team'
 
 
@@ -83,7 +78,6 @@ class Staff(models.Model):
     team = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'staff'
 
 
@@ -98,7 +92,6 @@ class Player(models.Model):
     position = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'player'
 
 class PitchingStats(models.Model):
@@ -116,7 +109,6 @@ class PitchingStats(models.Model):
         return [(field.name.replace("_", " "), field.value_to_string(self)) for field in PitchingStats._meta.fields if field.name not in "player"]
 
     class Meta:
-        managed = False
         db_table = 'pitching_stats'
 
 
@@ -131,7 +123,6 @@ class FieldingStats(models.Model):
         return [(field.name.replace("_", " "), field.value_to_string(self)) for field in FieldingStats._meta.fields if field.name not in "player"]
 
     class Meta:
-        managed = False
         db_table = 'fielding_stats'
 
 
@@ -154,7 +145,6 @@ class BattingStats(models.Model):
         return [(field.name.replace("_", " "), field.value_to_string(self)) for field in BattingStats._meta.fields if field.name not in "player"]
 
     class Meta:
-        managed = False
         db_table = 'batting_stats'
 
 
@@ -183,7 +173,6 @@ class Match(models.Model):
         return sum(i.away_errors for i in self.inning_set.all())
 
     class Meta:
-        managed = False
         db_table = 'match'
 
 
@@ -198,5 +187,4 @@ class Inning(models.Model):
     away_errors = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'inning'
