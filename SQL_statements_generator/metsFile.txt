@@ -1,0 +1,9 @@
+INSERT INTO TEAM VALUES('0004','0003', '0003', '0004','Mets' '10','2')
+INSERT INTO PLAYER VALUES('0005',,'0004', '0004','0','Leroy','Halliday','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('0006',,'0004', '0004','1','David','Jenkins','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('0007',,'0004', '0004','2','Lila','Mason','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('0008',,'0004', '0004','3','Rosie','Ellis','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('0009',,'0004', '0004','4','Christopher','Ahmann','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('00010',,'0004', '0004','5','Chad','Daniels','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('00011',,'0004', '0004','6','Lori','Hall','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('00012',,'0004', '0004','7','Doris','Stout','2008-07-20','Pitcher');
