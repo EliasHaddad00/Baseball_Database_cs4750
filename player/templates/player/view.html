@@ -89,11 +89,55 @@
             <div class="card shadow p-3 border rounded-corner">
                 
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                {% if player.pitchingstats %}
+                    <script type="text/javascript">
+                        google.load("visualization", '1', {packages:['corechart']});
+                        google.setOnLoadCallback(drawPitchingChart)
+                        function drawPitchingChart() {
+                            var data = google.visualization.arrayToDataTable([
+                                ["Statistic", "Count", { role: "style" } ],
+                                {% for name, value in player.pitchingstats.get_fields %}["{{ name|capfirst }}", {{ value }}, "blue"],{% endfor %}
+                            ]);
+
+                            var options = {
+                                title: "Pitching Statistics",
+                                legend: { position: "none" },
+                            };
+                            var chart = new google.visualization.ColumnChart(document.getElementById("pitching_columnchart_values"));
+                            chart.draw(data, options);
+                        }
+                        $(window).resize(drawPitchingChart);
+                        $('a[data-toggle="tab"]').on('hidden.bs.tab', drawPitchingChart)
+                    </script>
+                    <div id="pitching_columnchart_values"></div>
+                {% endif %}
+                {% if player.fieldingstats %}
+                    <script type="text/javascript">
+                        google.load("visualization", '1', {packages:['corechart']});
+                        google.setOnLoadCallback(drawFieldingChart)
+                        function drawFieldingChart() {
+                            var data = google.visualization.arrayToDataTable([
+                                ["Statistic", "Count", { role: "style" } ],
+                                {% for name, value in player.fieldingstats.get_fields %}["{{ name|capfirst }}", {{ value }}, "blue"],{% endfor %}
+                            ]);
+
+                            var options = {
+                                title: "Fielding Statistics",
+                                legend: { position: "none" },
+                            };
+                            var chart = new google.visualization.ColumnChart(document.getElementById("fielding_columnchart_values"));
+                            chart.draw(data, options);
+                        }
+                        $(window).resize(drawFieldingChart);
+                        $('a[data-toggle="tab"]').on('hidden.bs.tab', drawFieldingChart)
+                    </script>
+                    <div id="fielding_columnchart_values"></div>
+                {% endif %}
                 {% if player.battingstats %}
                     <script type="text/javascript">
                         google.load("visualization", '1', {packages:['corechart']});
-                        google.setOnLoadCallback(drawChart)
-                        function drawChart() {
+                        google.setOnLoadCallback(drawBattingChart)
+                        function drawBattingChart() {
                             var data = google.visualization.arrayToDataTable([
                                 ["Statistic", "Count", { role: "style" } ],
                                 {% for name, value in player.battingstats.get_fields %}["{{ name|capfirst }}", {{ value }}, "blue"],{% endfor %}
@@ -103,13 +147,13 @@
                                 title: "Batting Statistics",
                                 legend: { position: "none" },
                             };
-                            var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                            var chart = new google.visualization.ColumnChart(document.getElementById("batting_columnchart_values"));
                             chart.draw(data, options);
                         }
-                        $(window).resize(drawChart);
-                        $('a[data-toggle="tab"]').on('hidden.bs.tab', drawChart)
+                        $(window).resize(drawBattingChart);
+                        $('a[data-toggle="tab"]').on('hidden.bs.tab', drawBattingChart)
                     </script>
-                    <div id="columnchart_values"></div>
+                    <div id="batting_columnchart_values"></div>
                 {% endif %}
             </div>
         </div>
