@@ -97,15 +97,14 @@
                 <table class="table table-striped table-bordered table-sm center-justify">
                     <thead>
                         <th scope="col">&nbsp;</th>
-                        <th scope="col">HA</th>
-                        <th scope="col">RA</th>
-                        <th scope="col">ERA</th>
-                        <th scope="col">IT</th>
-                        <th scope="col">PT</th>
+                        <th scope="col">H</th>
+                        <th scope="col">R</th>
+                        <th scope="col">ER</th>
+                        <th scope="col">I</th>
+                        <th scope="col">P</th>
                         <th scope="col">ST</th>
                         <th scope="col">SO</th>
                         <th scope="col">BB</th>
-
                     </thead>
                     {% for player in team.player_set.all %}
                         {% if player.pitchingstats %}
@@ -124,7 +123,7 @@
                     <thead>
                         <th scope="col">&nbsp;</th>
                         <th scope="col">E</th>
-                        <th scope="col">P</th>
+                        <th scope="col">PO</th>
                         <th scope="col">A</th>
                         <th scope="col">TC</th>
                     </thead>
@@ -146,15 +145,15 @@
                         <th scope="col">&nbsp;</th>
                         <th scope="col">PA</th>
                         <th scope="col">AB</th>
-                        <th scope="col">S</th>
+                        <th scope="col">SAC</th>
                         <th scope="col">H</th>
                         <th scope="col">RBI</th>
                         <th scope="col">HR</th>
+                        <th scope="col">1B</th>
+                        <th scope="col">2B</th>
+                        <th scope="col">3B</th>
                         <th scope="col">S</th>
-                        <th scope="col">D</th>
-                        <th scope="col">T</th>
-                        <th scope="col">S</th>
-                        <th scope="col">W</th>
+                        <th scope="col">BB</th>
                         <th scope="col">HBP</th>
                     </thead>
                         {% for player in team.player_set.all %}

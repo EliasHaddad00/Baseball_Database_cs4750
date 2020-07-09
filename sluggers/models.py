@@ -201,4 +201,5 @@ class Inning(models.Model):
 
     class Meta:
         db_table = 'inning'
+        unique_together = ("match", "inning_num")
         ordering = ['match', 'inning_num']
