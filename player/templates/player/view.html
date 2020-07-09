@@ -90,17 +90,27 @@
             <div class="card shadow p-3 border rounded-corner">
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <script type="text/javascript">
+
                   google.charts.load("current", {packages:['corechart']});
                   google.charts.setOnLoadCallback(drawChart);
                   function drawChart() {
                     var data = google.visualization.arrayToDataTable([
-                      ["Element", "Density", { role: "style" } ],
-                      ["Copper", 8.94, "#b87333"],
-                      ["Silver", 10.49, "silver"],
-                      ["Gold", 19.30, "gold"],
-                      ["Platinum", 21.45, "color: #e5e4e2"]
+                        ["Element", "Density", { role: "style" } ],
+                        ["plate_app", 3, "blue"],
+                        ["at_bats", 2, "blue"],
+                        ["sacrifices", 3, "blue"],
+                        ["hits", 2, "blue"],
+                        ["rbi", 1, "blue"],
+                        ["home_runs", 0, "blue"],
+                        ["singles", 1, "blue"],
+                        ["doubles", 1, "blue"],
+                        ["triples", 0, "blue"],
+                        ["steals", 2, "blue"],
+                        ["walks", 1, "blue"],
+                        ["hit_by_pitch", 0, "blue"]
+
                     ]);
-              
+
                     var view = new google.visualization.DataView(data);
                     view.setColumns([0, 1,
                                      { calc: "stringify",
@@ -108,11 +118,11 @@
                                        type: "string",
                                        role: "annotation" },
                                      2]);
-              
+
                     var options = {
-                      title: "Density of Precious Metals, in g/cm^3",
-                      width: 600,
-                      height: 400,
+                      title: "Player Statistics",
+                      width: 1000,
+                      height: 200,
                       bar: {groupWidth: "95%"},
                       legend: { position: "none" },
                     };
@@ -123,7 +133,7 @@
               <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
 
             </div>
-        </div> 
+        </div>
     </div>
 </div>
 {% endblock %}
