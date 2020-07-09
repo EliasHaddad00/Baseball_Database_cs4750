@@ -7,3 +7,4 @@ INSERT INTO PLAYER VALUES('00027',,'0006', '0004','22','Ashley','Walker','2008-0
 INSERT INTO PLAYER VALUES('00028',,'0006', '0004','23','Elsie','Viator','2008-07-20','Pitcher');
 INSERT INTO PLAYER VALUES('00029',,'0006', '0004','24','Sally','Henry','2008-07-20','Pitcher');
 INSERT INTO PLAYER VALUES('00030',,'0006', '0004','25','Abel','Melena','2008-07-20','Pitcher');
+

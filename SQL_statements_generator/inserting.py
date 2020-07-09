@@ -44,23 +44,24 @@ for team in team_names:
             id = (i + 5)
             str1="INSERT INTO PLAYER VALUES('000"+str(id)+"',"+",'0004', '0004','"+str(i)+"',"+"'"+first_names[i] +"',"+"'"+last_names[i] +"',"+"'2008-07-20','Pitcher');\n"
             metsFile.write(str1)
-            for j in range(0, 5):
-                fielding_insert="INSERT INTO FIELDING_STATS VALUES('000"+str(id)+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"');\n"
-                fieldingFile.write(fielding_insert)
-                pitching_insert = "INSERT INTO PITCHING_STATS VALUES('000" + str(id) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
-                    random.randint(30, 90)) + "','" + str(random.randint(15, 50)) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
-                batting_insert = "INSERT INTO BATTING_STATS VALUES('000" + str(id) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "');\n"
-                pitchingFile.write(pitching_insert)
-                battingFile.write(batting_insert)
+            fielding_insert = "INSERT INTO FIELDING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
+            fieldingFile.write(fielding_insert)
+            pitching_insert = "INSERT INTO PITCHING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(30, 90)) + "','" + str(random.randint(15, 50)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
+            batting_insert = "INSERT INTO BATTING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "');\n"
+            pitchingFile.write(pitching_insert)
+            battingFile.write(batting_insert)
 
     if team=='Philadelphia Phillies':
         creating = "INSERT INTO TEAM VALUES('0005','0002', '0002', '0004','Phillies', '10','2');\n"
@@ -72,23 +73,22 @@ for team in team_names:
             id = (i + 5)
             str1="INSERT INTO PLAYER VALUES('000"+str(id)+"',"+",'0005', '0004','"+str(i)+"',"+"'"+first_names[i] +"',"+"'"+last_names[i] +"',"+"'2008-07-20','Pitcher');\n"
             philliesFile.write(str1)
-            for j in range(0, 5):
-                fielding_insert="INSERT INTO FIELDING_STATS VALUES('000"+str(id)+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"');\n"
-                fieldingFile.write(fielding_insert)
-                pitching_insert = "INSERT INTO PITCHING_STATS VALUES('000" + str(id) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
-                    random.randint(30, 90)) + "','" + str(random.randint(15, 50)) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
-                batting_insert = "INSERT INTO BATTING_STATS VALUES('000" + str(id) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "');\n"
-                pitchingFile.write(pitching_insert)
-                battingFile.write(batting_insert)
+            fielding_insert="INSERT INTO FIELDING_STATS VALUES('000"+str(id)+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"');\n"
+            fieldingFile.write(fielding_insert)
+            pitching_insert = "INSERT INTO PITCHING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(30, 90)) + "','" + str(random.randint(15, 50)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
+            batting_insert = "INSERT INTO BATTING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "');\n"
+            pitchingFile.write(pitching_insert)
+            battingFile.write(batting_insert)
 
     if team=='Chicago Cubs':
         creating = "INSERT INTO TEAM VALUES('0006','0001', '0003', '0004','Cubs', '10','2');\n"
@@ -100,23 +100,24 @@ for team in team_names:
             id=(i + 5)
             str1="INSERT INTO PLAYER VALUES('000"+str(id)+"',"+",'0006', '0004','"+str(i)+"',"+"'"+first_names[i] +"',"+"'"+last_names[i] +"',"+"'2008-07-20','Pitcher');\n"
             cubsFile.write(str1)
-            for j in range(0, 5):
-                fielding_insert="INSERT INTO FIELDING_STATS VALUES('000"+str(id)+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"');\n"
-                fieldingFile.write(fielding_insert)
-                pitching_insert = "INSERT INTO PITCHING_STATS VALUES('000" + str(id) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
-                    random.randint(30, 90)) + "','" + str(random.randint(15, 50)) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
-                batting_insert = "INSERT INTO BATTING_STATS VALUES('000" + str(id) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "');\n"
-                pitchingFile.write(pitching_insert)
-                battingFile.write(batting_insert)
+            fielding_insert = "INSERT INTO FIELDING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
+            fieldingFile.write(fielding_insert)
+            pitching_insert = "INSERT INTO PITCHING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(30, 90)) + "','" + str(random.randint(15, 50)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
+            batting_insert = "INSERT INTO BATTING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "');\n"
+            pitchingFile.write(pitching_insert)
+            battingFile.write(batting_insert)
 
     if team=='Cincinnati Reds':
         creating = "INSERT INTO TEAM VALUES('0007','0003', '0002', '0004','Reds', '10','2');\n"
@@ -127,20 +128,21 @@ for team in team_names:
             id = (i + 5)
             str1="INSERT INTO PLAYER VALUES('000"+str(id)+"',"+",'0007', '0004','"+str(i)+"',"+"'"+first_names[i] +"',"+"'"+last_names[i] +"',"+"'2008-07-20','Pitcher');\n"
             RedsFile.write(str1)
-            for j in range(0, 5):
-                fielding_insert="INSERT INTO FIELDING_STATS VALUES('000"+str(id)+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"','"+str(random.randint(0,9))+"');\n"
-                fieldingFile.write(fielding_insert)
-                pitching_insert = "INSERT INTO PITCHING_STATS VALUES('000" + str(id) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
-                    random.randint(30, 90)) + "','" + str(random.randint(15, 50)) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
-                batting_insert = "INSERT INTO BATTING_STATS VALUES('000" + str(id) + "','" + str(
-                    random.randint(0, 9)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
-                    random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "');\n"
-                pitchingFile.write(pitching_insert)
-                battingFile.write(batting_insert)
+            fielding_insert = "INSERT INTO FIELDING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
+            fieldingFile.write(fielding_insert)
+            pitching_insert = "INSERT INTO PITCHING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "','" + str(
+                random.randint(30, 90)) + "','" + str(random.randint(15, 50)) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 9)) + "');\n"
+            batting_insert = "INSERT INTO BATTING_STATS VALUES('000" + str(id) + "','" + str(
+                random.randint(0, 9)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "','" + str(
+                random.randint(0, 5)) + "','" + str(random.randint(0, 5)) + "');\n"
+            pitchingFile.write(pitching_insert)
+            battingFile.write(batting_insert)
