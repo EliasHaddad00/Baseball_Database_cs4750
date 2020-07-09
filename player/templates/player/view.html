@@ -89,26 +89,28 @@
             <div class="card shadow p-3 border rounded-corner">
                 
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                <script type="text/javascript">
-                    google.load("visualization", '1', {packages:['corechart']});
-                    google.setOnLoadCallback(drawChart)
-                    function drawChart() {
-                        var data = google.visualization.arrayToDataTable([
-                            ["Statistic", "Count", { role: "style" } ],
-                            {% for name, value in player.battingstats.get_fields %}["{{ name|capfirst }}", {{ value }}, "blue"],{% endfor %}
-                        ]);
-                        
-                        var options = {
-                            title: "Batting Statistics",
-                            legend: { position: "none" },
-                        };
-                        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-                        chart.draw(data, options);
-                    }
-                    $(window).resize(drawChart);
-                    $('a[data-toggle="tab"]').on('hidden.bs.tab', drawChart)
-                </script>
-                <div id="columnchart_values"></div>
+                {% if player.battingstats %}
+                    <script type="text/javascript">
+                        google.load("visualization", '1', {packages:['corechart']});
+                        google.setOnLoadCallback(drawChart)
+                        function drawChart() {
+                            var data = google.visualization.arrayToDataTable([
+                                ["Statistic", "Count", { role: "style" } ],
+                                {% for name, value in player.battingstats.get_fields %}["{{ name|capfirst }}", {{ value }}, "blue"],{% endfor %}
+                            ]);
+
+                            var options = {
+                                title: "Batting Statistics",
+                                legend: { position: "none" },
+                            };
+                            var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                            chart.draw(data, options);
+                        }
+                        $(window).resize(drawChart);
+                        $('a[data-toggle="tab"]').on('hidden.bs.tab', drawChart)
+                    </script>
+                    <div id="columnchart_values"></div>
+                {% endif %}
             </div>
         </div>
     </div>
