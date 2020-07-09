@@ -32,7 +32,6 @@
                     <a href="tel:{{ player.contact.contact_number }}" class="text-decoration-none">{{ player.contact.contact_number }}</a><br>
                     <a href="mailto:{{ player.contact.contact_email }}" class="text-decoration-none">{{ player.contact.contact_email }}</a>
                 </p>
-
             </div>
         </div> 
         <div class="tab-pane fade" id="stats">
@@ -90,48 +89,33 @@
             <div class="card shadow p-3 border rounded-corner">
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <script type="text/javascript">
+                    google.load("visualization", '1', {packages:['corechart']});
+                    google.setOnLoadCallback(drawChart)
+                    function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            ["Statistic", "Count", { role: "style" } ],
+                            {% for name, value in player.battingstats.get_fields %}["{{ name|capfirst }}", {{ value }}, "blue"],{% endfor %}
+                        ]);
 
-                  google.charts.load("current", {packages:['corechart']});
-                  google.charts.setOnLoadCallback(drawChart);
-                  function drawChart() {
-                    var data = google.visualization.arrayToDataTable([
-                        ["Element", "Density", { role: "style" } ],
-                        ["plate_app", 3, "blue"],
-                        ["at_bats", 2, "blue"],
-                        ["sacrifices", 3, "blue"],
-                        ["hits", 2, "blue"],
-                        ["rbi", 1, "blue"],
-                        ["home_runs", 0, "blue"],
-                        ["singles", 1, "blue"],
-                        ["doubles", 1, "blue"],
-                        ["triples", 0, "blue"],
-                        ["steals", 2, "blue"],
-                        ["walks", 1, "blue"],
-                        ["hit_by_pitch", 0, "blue"]
+                        /*var view = new google.visualization.DataView(data);
+                        view.setColumns([0, 1,
+                                        { calc: "stringify",
+                                        sourceColumn: 1,
+                                        type: "string",
+                                        role: "annotation" },
+                                        2]);*/
 
-                    ]);
-
-                    var view = new google.visualization.DataView(data);
-                    view.setColumns([0, 1,
-                                     { calc: "stringify",
-                                       sourceColumn: 1,
-                                       type: "string",
-                                       role: "annotation" },
-                                     2]);
-
-                    var options = {
-                      title: "Player Statistics",
-                      width: 1000,
-                      height: 200,
-                      bar: {groupWidth: "95%"},
-                      legend: { position: "none" },
-                    };
-                    var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-                    chart.draw(view, options);
-                }
+                        var options = {
+                            title: "Batting Statistics",
+                            legend: { position: "none" },
+                        };
+                        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                        chart.draw(data, options);
+                    }
+                    $(window).resize(drawChart);
+                    $('a[data-toggle="tab"]').on('hidden.bs.tab', drawChart)
                 </script>
-              <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
-
+                <div id="columnchart_values"></div>
             </div>
         </div>
     </div>
