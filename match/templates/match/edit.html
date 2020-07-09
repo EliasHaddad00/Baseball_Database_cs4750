@@ -2,33 +2,37 @@
 
 {% block content %}
 <div class="card shadow p-4 border rounded-corner mt-5">
-    <form method="post" action="{% url 'match:edit' %}">
+    <form method="post" action="{% url 'match:edit' match.match_id %}">
         {% csrf_token %}
         <div class="d-flex flex-horizontal justify-content-between align-items-center">
             <h1>Edit Match</h1>
             <button type="submit" class="btn btn-primary rounded-corner">Save <i class="fa fa-floppy-o"></i></button>
         </div>
-        <div class="form-group">
-            <label for="agegroup">Age Group</label>
-            <select class="form-control" id="agegroup">
-              <option>Majors</option>
-              <option>Minors</option>
-            </select>
-        </div>
+        <select class="form-control" id="agegroup" onchange="updateTeams()" required>
+            {% for ag in agegroups %}
+                <option value="{{ ag.age_group_id }}" {% if ag.age_group_id == age_group %}selected="selected"{% endif %}>{{ ag.age_group_desc }}</option>
+            {% endfor %}
+        </select>
 
         <div class="form-row">
             <div class="col form-group">
                 <label for="home_team">Home Team</label>
                 <select class="form-control" id="home_team" name="home_team">
-                    <option>Washington Nationals</option>
-                    <option>LA Dodgers</option>
+                    {% for team in teams %}
+                        {% if team.age_group.age_group_id == age_group %}
+                            <option value="{{ team.team_id }}"{% if team.team_id == match.home_team.team_id %} selected="selected"{% endif %}>{{ team.team_name }}</option>
+                        {% endif %}
+                    {% endfor %}
                 </select>
             </div>
             <div class="col form-group">
                 <label for="away_team">Home Team</label>
                 <select class="form-control" id="away_team" name="away_team">
-                    <option>Washington Nationals</option>
-                    <option>LA Dodgers</option>
+                    {% for team in teams %}
+                        {% if team.age_group.age_group_id == age_group %}
+                            <option value="{{ team.team_id }}"{% if team.team_id == match.away_team.team_id %} selected="selected"{% endif %}>{{ team.team_name }}</option>
+                        {% endif %}
+                    {% endfor %}
                 </select>
             </div>
         </div>
@@ -42,7 +46,7 @@
                 <div class="card shadow p-3 border rounded-corner">
                     <div class="form-group">
                         <h4>Game Date</h4>
-                        <input type="datetime-local" class="form-control" id="game_date" aria-describedby="game_date" name="game_date">
+                        <input type="date" class="form-control" id="game_date" aria-describedby="game_date" name="game_date" value="{{ match.match_date|date:'Y-m-d'}}">
                     </div>
                     <br>
                     <div class="form-group">
@@ -57,29 +61,32 @@
             <div class="tab-pane fade" id="boxscore">
                 <div class="card shadow p-3 border rounded-corner">
                     <div id="innings">
-                        <div class="card shadow p-3 border rounded-corner">
-                            <h4>Inning 1</h4>
-                            <table class="table center-justify">
-                                <thead class="table-active">
-                                    <th scope="col">&nbsp;</th>
-                                    <th scope="col">H</th>
-                                    <th scope="col">R</th>
-                                    <th scope="col">E</th>
-                                </thead>
-                                <tr>
-                                    <th scope="row">Home</th>
-                                    <td><input type="text" class="form-control" id="i1hh" name="i1hh"></td>
-                                    <td><input type="text" class="form-control" id="i1hr" name="i1hr"></td>
-                                    <td><input type="text" class="form-control" id="i1he" name="i1he"></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Away</th>
-                                    <td><input type="text" class="form-control" id="i1ah" name="i1hh"></td>
-                                    <td><input type="text" class="form-control" id="i1ar" name="i1ar"></td>
-                                    <td><input type="text" class="form-control" id="i1ae" name="i1ae"></td>
-                                </tr>
-                            </table>
-                        </div></div>
+                        {% for inning in match.inning_set.all %}
+                            <div class="card shadow p-3 mt-2 border rounded-corner">
+                                <h4>Inning {{ inning.inning_num }}</h4>
+                                <table class="table center-justify">
+                                    <thead class="table-active">
+                                        <th scope="col">&nbsp;</th>
+                                        <th scope="col">R</th>
+                                        <th scope="col">H</th>
+                                        <th scope="col">E</th>
+                                    </thead>
+                                    <tr>
+                                        <th scope="row">Home</th>
+                                        <td><input type="text" class="form-control" id="i{{ inning.inning_num }}hr" name="i{{ inning.inning_num }}hr" value="{{ inning.home_runs }}"></td>
+                                        <td><input type="text" class="form-control" id="i{{ inning.inning_num }}hh" name="i{{ inning.inning_num }}hh" value="{{ inning.home_hits }}"></td>
+                                        <td><input type="text" class="form-control" id="i{{ inning.inning_num }}he" name="i{{ inning.inning_num }}he" value="{{ inning.home_errors }}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Away</th>
+                                        <td><input type="text" class="form-control" id="i{{ inning.inning_num }}ar" name="i{{ inning.inning_num }}ar" value="{{ inning.away_runs }}"></td>
+                                        <td><input type="text" class="form-control" id="i{{ inning.inning_num }}ah" name="i{{ inning.inning_num }}ah" value="{{ inning.away_hits }}"></td>
+                                        <td><input type="text" class="form-control" id="i{{ inning.inning_num }}ae" name="i{{ inning.inning_num }}ae" value="{{ inning.away_errors }}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        {% endfor %}
+                    </div>
                     <div class="d-flex flex-horizontal justify-content-between pt-2">
                         <button type="button" class="btn btn-primary rounded-corner" onclick="addInning()">Add Inning</button>
                         <button type="button" class="btn btn-secondary rounded-corner" onclick="removeInning()">Remove Inning</button>
@@ -247,6 +254,26 @@
 
     function save() {
 
+    }
+</script>
+
+<script>
+    {% for ag in agegroups %}var ag{{ ag.age_group_id }} = '{% spaceless %}{% for t in ag.team_set.all %}<option value="{{ t.team_id }}">{{ t.team_name }}</option>{% endfor %}{% endspaceless %}';
+    {% endfor %}
+    function updateTeams() {
+        var id = document.getElementById("agegroup").value;
+        switch(id) {
+            {% for ag in agegroups %}
+            case '{{ ag.age_group_id }}':
+                document.getElementById("home_team").innerHTML = ag{{ ag.age_group_id }};
+                document.getElementById("away_team").innerHTML = ag{{ ag.age_group_id }};
+                break;
+            {% endfor %}
+            default:
+                document.getElementById("home_team").innerHTML = '';
+                document.getElementById("away_team").innerHTML = '';
+                break;
+        }
     }
 </script>
 {% endblock %}

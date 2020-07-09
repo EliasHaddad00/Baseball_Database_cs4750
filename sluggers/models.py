@@ -192,3 +192,4 @@ class Inning(models.Model):
 
     class Meta:
         db_table = 'inning'
+        ordering = ['match', 'inning_num']

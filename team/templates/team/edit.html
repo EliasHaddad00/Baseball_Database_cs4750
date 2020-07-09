@@ -26,7 +26,7 @@
                         {% with game=next_game %}
                             <div class="d-flex flex-horizontal">
                                 <a href="{% url 'match:view' game.match_id %}" class="text-decoration-none">{{ game.match_date }} - {% if game.home_team == team %}<span class="font-weight-bold">Home</span> vs. {{ game.away_team.team_name }}{% else %}Away at <span class="font-weight-bold">{{ game.home_team.team_name }}</span>{% endif %}</a>
-                                <a href="{% url 'match:delete' game.match_id %}" class="text-decoration-none ml-auto">delete</a>
+                                <a href="{% url 'match:delete' match_id=game.match_id return_id=team.team_id %}" class="text-decoration-none ml-auto">delete</a>
                             </div>
                         {% endwith %}
                     {% else %}
@@ -39,7 +39,7 @@
                         {% for game in upcoming_games %}
                             <div class="d-flex flex-horizontal">
                                 <a href="{% url 'match:view' game.match_id %}" class="text-decoration-none">{{ game.match_date }} - {% if game.home_team == team %}<span class="font-weight-bold">Home</span> vs. {{ game.away_team.team_name }}{% else %}Away at <span class="font-weight-bold">{{ game.home_team.team_name }}</span>{% endif %}</a>
-                                <a href="{% url 'match:delete' game.match_id %}" class="text-decoration-none ml-auto">delete</a>
+                                <a href="{% url 'match:delete' match_id=game.match_id return_id=team.team_id %}" class="text-decoration-none ml-auto">delete</a>
                             </div>
                         {% endfor %}
                     {% endif %}
@@ -50,7 +50,7 @@
                         {% for game in past_games %}
                             <div class="d-flex flex-horizontal">
                                 <a href="{% url 'match:view' game.match_id %}" class="text-decoration-none">{{ game.match_date }} - {% if game.home_team == team %}{% if game.home_score > game.away_score %}W{% elif game.home_score == game.away_score %}T{% else %}L{% endif %} ({{ game.home_score }}-{{ game.away_score }}) - {{ game.away_team.team_name }}{% else %}{% if game.home_score > game.away_score %}L{% elif game.home_score == game.away_score %}T{% else %}W{% endif %} ({{ game.home_score }}-{{ game.away_score }}) - {{ game.home_team.team_name }}{% endif %}</a>
-                                <a href="{% url 'match:delete' game.match_id %}" class="text-decoration-none ml-auto">delete</a>
+                                <a href="{% url 'match:delete' match_id=game.match_id return_id=team.team_id %}" class="text-decoration-none ml-auto">delete</a>
                             </div>
                         {% endfor %}
                         
