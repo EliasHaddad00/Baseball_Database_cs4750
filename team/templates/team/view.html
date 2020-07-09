@@ -108,7 +108,7 @@
 
                     </thead>
                     {% for player in team.player_set.all %}
-                        {% if "Pitcher" in player.position %}
+                        {% if player.pitchingstats %}
                             <tr>
                                 <th scope="row">{{ player.first_name }} {{ player.last_name }}</th>
                                 {% for name, value in player.pitchingstats.get_fields %}
@@ -129,7 +129,7 @@
                         <th scope="col">TC</th>
                     </thead>
                     {% for player in team.player_set.all %}
-                        {% if "Pitcher" not in player.position %}
+                        {% if player.fieldingstats %}
                             <tr>
                                 <th scope="row">{{ player.first_name }} {{ player.last_name }}</th>
                                 {% for name, value in player.fieldingstats.get_fields %}
