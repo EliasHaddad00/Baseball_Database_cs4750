@@ -4,7 +4,15 @@
 {% block content %}
     <h2 class="my-4">Welcome to the Sluggers Database.</h2>
     <p>We're currently helping the Richmond Little League increase accessability to statistics!</p>
-    <a href="{% url 'team:view' 1 %}">Example Team Page</a><br>
-    <a href="{% url 'match:view' 1 %}">Example Match Page</a><br>
-    <a href="{% url 'player:view' 1 %}">Example Player Page</a><br>
+    
+    {% for ag in agegroups %}
+        {% if ag.team_set.all|length > 0 %}
+            <div class="card shadow p-4 border rounded-corner mt-2">
+                <h3>{{ ag.age_group_desc }}</h3>
+                {% for team in ag.team_set.all %}
+                    <a href="{% url 'team:view' team.team_id %}">{{ team.team_name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
