@@ -1,9 +1,9 @@
 INSERT INTO TEAM VALUES('0007','0003', '0002', '0004','Reds', '10','2');
-INSERT INTO STAFF VALUES('0007','0003', '0002');
-INSERT INTO PLAYER VALUES('00032',,'0007', '0004','27','Donna','Shin','2008-07-20','Pitcher');
-INSERT INTO PLAYER VALUES('00033',,'0007', '0004','28','Anthony','Midgley','2008-07-20','Pitcher');
-INSERT INTO PLAYER VALUES('00034',,'0007', '0004','29','Edward','Smith','2008-07-20','Pitcher');
-INSERT INTO PLAYER VALUES('00035',,'0007', '0004','30','Kenneth','Belle','2008-07-20','Pitcher');
-INSERT INTO PLAYER VALUES('00036',,'0007', '0004','31','Gabe','Scott','2008-07-20','Pitcher');
-INSERT INTO PLAYER VALUES('00037',,'0007', '0004','32','Erick','Beauchamp','2008-07-20','Pitcher');
-INSERT INTO PLAYER VALUES('00038',,'0007', '0004','33','Brandon','Barber','2008-07-20','Pitcher');
+INSERT INTO STAFF VALUES('0002','0003', '0007');
+INSERT INTO PLAYER VALUES('00032','0007', '0004','27','Donna','Shin','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('00033','0007', '0004','28','Anthony','Midgley','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('00034','0007', '0004','29','Edward','Smith','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('00035','0007', '0004','30','Kenneth','Belle','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('00036','0007', '0004','31','Gabe','Scott','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('00037','0007', '0004','32','Erick','Beauchamp','2008-07-20','Pitcher');
+INSERT INTO PLAYER VALUES('00038','0007', '0004','33','Brandon','Barber','2008-07-20','Pitcher');

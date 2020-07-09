@@ -8,9 +8,11 @@
         {% if user.is_authenticated %}<a class="btn btn-primary rounded-corner" href="{% url 'team:edit' team.team_id %}">Edit <i class="fa fa-pencil"></i></a>{% endif %}
     </div>  
     <h3 class="text-muted">{{ team.age_group.age_group_desc }}</h3>
-    <ul class="nav nav-pills nav-fill mt-3">
+    <ul class="nav nav-pills nav-fill mt-3"players>
         <li class="nav-item"><a class="nav-link active rounded-corner" data-toggle="tab" href="#schedule">Schedule</a></li>
         <li class="nav-item"><a class="nav-link rounded-corner" data-toggle="tab" href="#players">Players</a></li>
+        <li class="nav-item"><a class="nav-link rounded-corner" data-toggle="tab" href="#coaches">Coaches</a></li>
+        <li class="nav-item"><a class="nav-link rounded-corner" data-toggle="tab" href="#managers">Managers</a></li>
         <li class="nav-item"><a class="nav-link rounded-corner" data-toggle="tab" href="#stats">Team Statistics</a></li>
     </ul>
     <div class="tab-content mt-3">
@@ -65,6 +67,30 @@
                 {% endfor %}
             </div>
         </div> 
+        <div class="tab-pane fade" id="managers">
+            <div class="card shadow p-3 border rounded-corner">
+                <h4>Managers</h4>
+                <hr class="mt-0 mb-1">
+                <p>
+                    <strong>{{ team.manager.manager_first }} {{ team.manager.manager_last }}</strong><br>
+                    <a href="tel:{{ team.manager.manager_phone }}" class="text-decoration-none">{{ team.manager.manager_phone }}</a><br>
+                    <a href="mailto:{{ team.manager.manager_email }}" class="text-decoration-none">{{ team.manager.manager_email }}</a>
+                </p>
+
+            </div>
+        </div> 
+        <div class="tab-pane fade" id="coaches">
+            <div class="card shadow p-3 border rounded-corner">
+
+                <h4>Coaches</h4>
+                <hr class="mt-0 mb-1">
+                <p>
+                    <strong>{{ team.coach.coach_first }} {{ team.coach.coach_last }}</strong><br>
+                    <a href="tel:{{ team.coach.coach_phone }}" class="text-decoration-none">{{ team.coach.coach_phone }}</a><br>
+                    <a href="mailto:{{ team.coach.coach_email }}" class="text-decoration-none">{{ team.coach.coach_email }}</a>
+                </p>
+            </div>
+        </div> 
         <div class="tab-pane fade" id="stats">
             <div class="card shadow p-3 border rounded-corner">
                 <h4>Pitching</h4>
@@ -82,7 +108,7 @@
 
                     </thead>
                     {% for player in team.player_set.all %}
-                        {% if "Pitcher" in player.position %}
+                        {% if player.pitchingstats %}
                             <tr>
                                 <th scope="row">{{ player.first_name }} {{ player.last_name }}</th>
                                 {% for name, value in player.pitchingstats.get_fields %}
@@ -103,7 +129,7 @@
                         <th scope="col">TC</th>
                     </thead>
                     {% for player in team.player_set.all %}
-                        {% if "Pitcher" not in player.position %}
+                        {% if player.fieldingstats %}
                             <tr>
                                 <th scope="row">{{ player.first_name }} {{ player.last_name }}</th>
                                 {% for name, value in player.fieldingstats.get_fields %}

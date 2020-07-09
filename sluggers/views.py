@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-# Create your views here.
-
-
+from .models import AgeGroup
 
 def index(request):
-    return render(template_name='sluggers/landing.html', request=request)
+    context={'agegroups': AgeGroup.objects.all()}
+    return render(template_name='sluggers/landing.html', request=request, context=context)

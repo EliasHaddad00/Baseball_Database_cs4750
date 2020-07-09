@@ -112,6 +112,9 @@ class PitchingStats(models.Model):
     def get_fields(self):
         return [(field.name.replace("_", " "), field.value_to_string(self)) for field in PitchingStats._meta.fields if field.name not in "player"]
 
+    def get_fields_default(self):
+        return [(field.name, field.value_to_string(self)) for field in PitchingStats._meta.fields if field.name not in "player"]
+
     class Meta:
         db_table = 'pitching_stats'
 
@@ -125,6 +128,9 @@ class FieldingStats(models.Model):
 
     def get_fields(self):
         return [(field.name.replace("_", " "), field.value_to_string(self)) for field in FieldingStats._meta.fields if field.name not in "player"]
+
+    def get_fields_default(self):
+        return [(field.name, field.value_to_string(self)) for field in FieldingStats._meta.fields if field.name not in "player"]
 
     class Meta:
         db_table = 'fielding_stats'
@@ -147,6 +153,9 @@ class BattingStats(models.Model):
 
     def get_fields(self):
         return [(field.name.replace("_", " "), field.value_to_string(self)) for field in BattingStats._meta.fields if field.name not in "player"]
+
+    def get_fields_default(self):
+        return [(field.name, field.value_to_string(self)) for field in BattingStats._meta.fields if field.name not in "player"]
 
     class Meta:
         db_table = 'batting_stats'
@@ -192,3 +201,4 @@ class Inning(models.Model):
 
     class Meta:
         db_table = 'inning'
+        ordering = ['match', 'inning_num']
